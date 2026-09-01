@@ -76,35 +76,35 @@ playBtn.addEventListener("click", () => {
 });
 
 async function startRoute(route) {
+  timeline?.kill();
+  applyCopy(route);
+  pickerEl.hidden = true;
+  storyEl.hidden = false;
+  walkBadge.hidden = false;
+  coursesBtn.hidden = false;
+  document.body.classList.remove("is-complete", "is-static");
+
   try {
-    timeline?.kill();
-    applyCopy(route);
     await mapApi.loadRoute(route);
-
-    pickerEl.hidden = true;
-    storyEl.hidden = false;
-    walkBadge.hidden = false;
-    coursesBtn.hidden = false;
-    document.body.classList.remove("is-complete", "is-static");
     mapApi.map?.invalidateSize?.();
-
-    timeline = buildTimeline(mapApi, { reducedMotion });
-    if (timeline) {
-      playBtn.hidden = false;
-      replayBtn.hidden = true;
-      playBtn.textContent = "Pause";
-      timeline.eventCallback("onComplete", () => {
-        document.body.classList.add("is-complete");
-        playBtn.hidden = true;
-        replayBtn.hidden = false;
-      });
-      timeline.play();
-    } else {
-      playBtn.hidden = true;
-      replayBtn.hidden = true;
-    }
   } catch (error) {
     console.error(error);
+  }
+
+  timeline = buildTimeline(mapApi, { reducedMotion });
+  if (timeline) {
+    playBtn.hidden = false;
+    replayBtn.hidden = true;
+    playBtn.textContent = "Pause";
+    timeline.eventCallback("onComplete", () => {
+      document.body.classList.add("is-complete");
+      playBtn.hidden = true;
+      replayBtn.hidden = false;
+    });
+    timeline.play();
+  } else {
+    playBtn.hidden = true;
+    replayBtn.hidden = true;
   }
 }
 

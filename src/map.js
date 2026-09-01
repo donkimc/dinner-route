@@ -49,7 +49,11 @@ export function createInviteMap(container) {
     startLatLng: PICKER_CENTER,
     endLatLng: PICKER_CENTER,
     async loadRoute(route) {
-      const geo = await fetch(route.routeUrl).then((r) => r.json());
+      const response = await fetch(route.routeUrl);
+      if (!response.ok) {
+        throw new Error(`Could not load ${route.routeUrl}`);
+      }
+      const geo = await response.json();
       api.coords = geo.features[0].geometry.coordinates;
       api.startLatLng = ll(route.start.lng, route.start.lat);
       api.endLatLng = ll(route.end.lng, route.end.lat);

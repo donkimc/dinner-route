@@ -1,3 +1,5 @@
+const asset = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
+
 const shared = {
   kicker: "An evening invitation",
   date: "날짜는 함께 정해요",
@@ -15,7 +17,7 @@ export const routes = [
     walkLabel: "약 380m · 5분 산책",
     walkBlurbKo: "저녁을 먹고, 성내동 골목으로 커피까지 걷습니다.",
     walkBlurbEn: "Five quiet minutes",
-    routeUrl: "/route.geojson",
+    routeUrl: asset("route.geojson"),
     overview: { center: [127.13188, 37.52655], zoom: 16.2, pitch: 0, bearing: -18 },
     start: {
       step: "01",
@@ -43,7 +45,7 @@ export const routes = [
       naver: "https://naver.me/FFGMoP5l",
       blurbKo: "호주 스타일 로스터리에서 저녁을 마무리합니다.",
       blurbEn: "We walk five minutes, then finish the night with coffee.",
-      photo: { src: "/photos/chesswood-1.jpg", alt: "채스우드커피" },
+      photo: { src: asset("photos/chesswood-1.jpg"), alt: "채스우드커피" },
       highlights: ["오지 카푸치노", "플랫화이트", "테라스", "우드 인테리어"],
     },
   },
@@ -56,7 +58,7 @@ export const routes = [
     walkLabel: "약 30m · 1분 산책",
     walkBlurbKo: "냉면을 먹고, 골목 건너 돼지고기로 이어갑니다.",
     walkBlurbEn: "Just around the corner",
-    routeUrl: "/route-naengmyeon.geojson",
+    routeUrl: asset("route-naengmyeon.geojson"),
     overview: { center: [127.1296, 37.54253], zoom: 18.1, pitch: 0, bearing: -12 },
     start: {
       step: "01",
