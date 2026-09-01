@@ -91,20 +91,15 @@ async function startRoute(route) {
   }
 
   timeline = buildTimeline(mapApi, { reducedMotion });
-  if (timeline) {
-    playBtn.hidden = false;
-    replayBtn.hidden = true;
-    playBtn.textContent = "Pause";
-    timeline.eventCallback("onComplete", () => {
-      document.body.classList.add("is-complete");
-      playBtn.hidden = true;
-      replayBtn.hidden = false;
-    });
-    timeline.play();
-  } else {
+  playBtn.hidden = false;
+  replayBtn.hidden = true;
+  playBtn.textContent = "Pause";
+  timeline.eventCallback("onComplete", () => {
+    document.body.classList.add("is-complete");
     playBtn.hidden = true;
-    replayBtn.hidden = true;
-  }
+    replayBtn.hidden = false;
+  });
+  timeline.play();
 }
 
 function showPicker() {

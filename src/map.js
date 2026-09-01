@@ -113,17 +113,17 @@ export function createInviteMap(container) {
       startEl?.querySelector(".pin")?.classList.toggle("is-active", which === "start" || which === "both");
       endEl?.querySelector(".pin")?.classList.toggle("is-active", which === "end" || which === "both");
     },
-    flyToStart() {
+    flyToStart(animate = true) {
       api.setActivePin("none");
-      fitRoute(map, api.startLatLng, api.endLatLng, true);
+      fitRoute(map, api.startLatLng, api.endLatLng, animate);
     },
-    flyToEnd() {
+    flyToEnd(animate = true) {
       api.setActivePin("end");
-      fitRoute(map, api.startLatLng, api.endLatLng, true);
+      fitRoute(map, api.startLatLng, api.endLatLng, animate);
     },
-    flyToOverview() {
+    flyToOverview(animate = true) {
       api.setActivePin("both");
-      fitRoute(map, api.startLatLng, api.endLatLng, true);
+      fitRoute(map, api.startLatLng, api.endLatLng, animate);
     },
     jumpOverview() {
       api.setActivePin("both");
