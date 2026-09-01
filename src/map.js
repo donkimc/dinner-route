@@ -16,30 +16,41 @@ export function createInviteMap(container) {
     attribution: "&copy; OpenStreetMap contributors",
   }).addTo(map);
 
-  const startIcon = pinIcon("1", "", "pin--dinner");
-  const endIcon = pinIcon("2", "", "pin--coffee");
-  const walkerIcon = L.divIcon({
-    className: "walker-wrap",
-    html: `<div class="walker"></div>`,
-    iconSize: [14, 14],
-    iconAnchor: [7, 7],
-  });
+  const startMarker = L.marker(PICKER_CENTER, {
+    icon: pinIcon("1", "", "pin--dinner"),
+    zIndexOffset: 800,
+  }).addTo(map);
+  const endMarker = L.marker(PICKER_CENTER, {
+    icon: pinIcon("2", "", "pin--coffee"),
+    zIndexOffset: 800,
+  }).addTo(map);
+  const walker = L.marker(PICKER_CENTER, {
+    icon: L.divIcon({
+      className: "walker-wrap",
+      html: `<div class="walker"></div>`,
+      iconSize: [18, 18],
+      iconAnchor: [9, 9],
+    }),
+    opacity: 0,
+    zIndexOffset: 900,
+  }).addTo(map);
 
-  const startMarker = L.marker(PICKER_CENTER, { icon: startIcon, opacity: 0 }).addTo(map);
-  const endMarker = L.marker(PICKER_CENTER, { icon: endIcon, opacity: 0 }).addTo(map);
-  const walker = L.marker(PICKER_CENTER, { icon: walkerIcon, opacity: 0 }).addTo(map);
   const ghostLine = L.polyline([], {
-    color: "#8a6a32",
-    weight: 4,
-    opacity: 0.5,
-    dashArray: "6 8",
+    color: "#c4923a",
+    weight: 7,
+    opacity: 0.95,
+    lineCap: "round",
+    lineJoin: "round",
   }).addTo(map);
   const drawnLine = L.polyline([], {
     color: "#6b3d12",
-    weight: 6,
-    opacity: 0.95,
+    weight: 5,
+    opacity: 1,
+    lineCap: "round",
+    lineJoin: "round",
   }).addTo(map);
 
+  hidePins();
   requestAnimationFrame(() => map.invalidateSize());
   window.addEventListener("resize", () => map.invalidateSize());
 
@@ -63,22 +74,19 @@ export function createInviteMap(container) {
       startMarker.setLatLng(api.startLatLng).setOpacity(1);
       endMarker.setLatLng(api.endLatLng).setOpacity(1);
       walker.setLatLng(ll(api.coords[0][0], api.coords[0][1])).setOpacity(0);
-      ghostLine.setLatLngs(api.coords.map(([lng, lat]) => [lat, lng]));
+
+      const latlngs = api.coords.map(([lng, lat]) => [lat, lng]);
+      ghostLine.setLatLngs(latlngs);
       drawnLine.setLatLngs([]);
+      ghostLine.bringToFront();
+      startMarker.setZIndexOffset(1000);
+      endMarker.setZIndexOffset(1000);
       api.setActivePin("both");
       map.invalidateSize();
-      map.fitBounds(L.latLngBounds([api.startLatLng, api.endLatLng]).pad(0.45), {
-        animate: true,
-        duration: 0.8,
-        maxZoom: 18,
-        paddingTopLeft: [24, 72],
-        paddingBottomRight: [24, 280],
-      });
+      fitRoute(map, api.startLatLng, api.endLatLng, true);
     },
     showPickerView() {
-      startMarker.setOpacity(0);
-      endMarker.setOpacity(0);
-      walker.setOpacity(0);
+      hidePins();
       ghostLine.setLatLngs([]);
       drawnLine.setLatLngs([]);
       map.flyTo(PICKER_CENTER, 13.6, { duration: 0.8 });
@@ -93,7 +101,7 @@ export function createInviteMap(container) {
     followWalker(t) {
       if (!api.coords.length) return;
       const { coord } = pointAlong(api.coords, t);
-      map.setView(ll(coord[0], coord[1]), 18, { animate: false });
+      map.setView(ll(coord[0], coord[1]), 17, { animate: false });
     },
     showWalker(show) {
       walker.setOpacity(show ? 1 : 0);
@@ -106,36 +114,40 @@ export function createInviteMap(container) {
     },
     flyToStart() {
       api.setActivePin("start");
-      map.flyTo(api.startLatLng, 18, { duration: 1.2 });
+      fitRoute(map, api.startLatLng, api.endLatLng, true);
     },
     flyToEnd() {
       api.setActivePin("end");
-      map.flyTo(api.endLatLng, 18, { duration: 1.1 });
+      fitRoute(map, api.startLatLng, api.endLatLng, true);
     },
     flyToOverview() {
       api.setActivePin("both");
-      map.fitBounds(L.latLngBounds([api.startLatLng, api.endLatLng]).pad(0.45), {
-        animate: true,
-        duration: 1.1,
-        maxZoom: 18,
-        paddingTopLeft: [24, 72],
-        paddingBottomRight: [24, 280],
-      });
+      fitRoute(map, api.startLatLng, api.endLatLng, true);
     },
     jumpOverview() {
       api.setActivePin("both");
       api.setLineProgress(1);
       api.showWalker(false);
-      map.fitBounds(L.latLngBounds([api.startLatLng, api.endLatLng]).pad(0.45), {
-        animate: false,
-        maxZoom: 18,
-        paddingTopLeft: [24, 72],
-        paddingBottomRight: [24, 280],
-      });
+      fitRoute(map, api.startLatLng, api.endLatLng, false);
     },
   };
 
+  function hidePins() {
+    startMarker.setOpacity(0);
+    endMarker.setOpacity(0);
+    walker.setOpacity(0);
+  }
+
   return api;
+}
+
+function fitRoute(map, start, end, animate) {
+  map.fitBounds(L.latLngBounds([start, end]).pad(0.35), {
+    animate,
+    duration: 0.9,
+    maxZoom: 17,
+    padding: [80, 80],
+  });
 }
 
 function ll(lng, lat) {
@@ -144,10 +156,10 @@ function ll(lng, lat) {
 
 function pinIcon(num, label, extra) {
   return L.divIcon({
-    className: "pin-wrap",
+    className: "pin-wrap leaflet-div-icon",
     html: `<div class="pin ${extra}"><span class="pin__num">${num}</span><em class="pin__label">${label}</em></div>`,
-    iconSize: [120, 48],
-    iconAnchor: [60, 44],
+    iconSize: [180, 72],
+    iconAnchor: [90, 68],
   });
 }
 

@@ -29,7 +29,7 @@ body {
   width: 100%;
   height: 100%;
   height: 100dvh;
-  z-index: 0;
+  z-index: 1;
 }
 
 .leaflet-container {
@@ -43,6 +43,12 @@ body {
 .walker-wrap {
   background: none !important;
   border: none !important;
+  overflow: visible !important;
+}
+
+.leaflet-marker-icon,
+.leaflet-div-icon {
+  overflow: visible !important;
 }
 
 .status {
@@ -78,7 +84,7 @@ body {
   background:
     radial-gradient(90% 70% at 62% 42%, transparent 42%, rgba(10, 7, 5, 0.28) 100%),
     linear-gradient(180deg, rgba(10, 7, 5, 0.18), transparent 18%, transparent 62%, rgba(10, 7, 5, 0.45));
-  z-index: 1;
+  z-index: 0;
 }
 
 .topbar {
@@ -383,17 +389,17 @@ h2 span {
 }
 
 .pin__num {
-  width: 2rem;
-  height: 2rem;
+  width: 2.4rem;
+  height: 2.4rem;
   border-radius: 999px;
   display: grid;
   place-items: center;
   background: #1a1410;
   color: var(--gold);
-  border: 2px solid var(--gold);
-  font-size: 0.8rem;
+  border: 3px solid var(--gold);
+  font-size: 1rem;
   font-weight: 700;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
 }
 
 .pin.is-active .pin__num {
