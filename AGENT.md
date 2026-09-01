@@ -49,3 +49,7 @@ npm run build
 ```
 
 No backend, no map API keys. Ignore `node_modules`, `dist`, `.verify`.
+
+## GitHub Pages
+
+Deploy via `.github/workflows/pages.yml` (build `dist/`, `base` `/dinner-route/` in CI). Do not point Pages at the repo root — browsers cannot run Vite source modules there, so the page looks like unstyled HTML.

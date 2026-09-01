@@ -21,6 +21,14 @@ npm run build    # output in dist/
 npm run preview  # serve the production build
 ```
 
+## Live site
+
+GitHub Pages serves the **Vite production build**, not the source `index.html`. After Pages is set to **GitHub Actions**, the site is:
+
+https://donkimc.github.io/dinner-route/
+
+Repo → Settings → Pages → Source: **GitHub Actions**. The first push after that workflow runs deploys `dist/`.
+
 No API keys. The map uses OpenStreetMap tiles via Leaflet.
 
 ## Edit copy and routes
