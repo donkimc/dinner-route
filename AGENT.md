@@ -52,4 +52,4 @@ No backend, no map API keys. Ignore `node_modules`, `dist`, `.verify`.
 
 ## GitHub Pages
 
-Deploy via `docs/` (committed Vite build, `base` `/dinner-route/`) or `.github/workflows/pages.yml`. Pages must **not** use the repo root — that serves source `index.html` and looks like unstyled HTML. After UI changes run `npm run build:pages` and commit `docs/`. Local asset URLs must use `import.meta.env.BASE_URL` (see `asset()` in `src/content.js`) so GitHub Pages under `/dinner-route/` can fetch GeoJSON and photos.
+GitHub Pages must use the **built** files at the repo root (`index.html`, `assets/`) or `docs/`. Never point Pages at Vite source. After UI changes run `npm run build:pages` and commit those generated files. Source HTML is `src/index.html`.

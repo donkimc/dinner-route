@@ -36,12 +36,11 @@ const stubMap = {
 let mapApi = stubMap;
 let timeline;
 
+statusEl.classList.add("is-gone");
 try {
-  mapApi = await createInviteMap(document.querySelector("#map"));
-  statusEl.classList.add("is-gone");
+  mapApi = createInviteMap(document.querySelector("#map"));
 } catch (error) {
   console.error(error);
-  statusEl.classList.add("is-gone");
 }
 
 pickerEl.querySelectorAll("[data-route]").forEach((btn) => {

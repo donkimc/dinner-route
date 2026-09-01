@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:pages": "GITHUB_ACTIONS=true vite build && rm -rf docs && cp -R dist docs && touch docs/.nojekyll",
+    "build:pages": "GITHUB_ACTIONS=true vite build && rm -rf docs && cp -R dist docs && touch docs/.nojekyll .nojekyll && cp dist/index.html ./index.html && rm -rf assets && cp -R dist/assets ./assets && cp -f dist/favicon.svg ./favicon.svg && cp -f dist/route.geojson ./route.geojson && cp -f dist/route-naengmyeon.geojson ./route-naengmyeon.geojson && mkdir -p photos && cp -R dist/photos/. photos/",
     "preview": "vite preview"
   },
   "devDependencies": {
