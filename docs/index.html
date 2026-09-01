@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/dinner-route/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>저녁 초대 — 코스를 골라 주세요</title>
+    <meta name="description" content="성내동 저녁 & 커피, 천호동 냉면 & 돼지고기. 코스를 골라 지도로 초대합니다." />
+    <script type="module" crossorigin src="/dinner-route/assets/index-DYhf9CBf.js"></script>
+    <link rel="stylesheet" crossorigin href="/dinner-route/assets/index-CJVUwlNW.css">
+  </head>
+  <body>
+    <div id="map" role="img" aria-label="강동구 저녁 코스 지도"></div>
+    <div class="vignette" aria-hidden="true"></div>
+    <p id="status" class="status">지도를 불러오는 중…</p>
+
+    <header class="topbar">
+      <p class="kicker">An evening invitation</p>
+      <p class="walk-badge" id="walk-badge" hidden></p>
+    </header>
+
+    <section id="picker" class="picker">
+      <p class="eyebrow">Choose a course</p>
+      <h1>어디로 갈까요?</h1>
+      <div class="picker-grid">
+        <button type="button" class="course-btn" data-route="dinner-coffee">
+          <small>Option 1</small>
+          <strong>저녁 & 커피</strong>
+          <span>상록분식 → 채스우드커피</span>
+        </button>
+        <button type="button" class="course-btn" data-route="naengmyeon-pork">
+          <small>Option 2</small>
+          <strong>냉면 & 돼지고기</strong>
+          <span>송월냉면 → 깡돈 천호점</span>
+        </button>
+      </div>
+    </section>
+
+    <section id="story" hidden aria-live="polite">
+      <article class="panel" id="panel-cover">
+        <p class="eyebrow" id="cover-area"></p>
+        <h1 id="cover-title"></h1>
+        <p class="date" id="date-line"></p>
+        <p class="date-en" id="date-line-en"></p>
+        <ol class="stops">
+          <li>
+            <strong id="cover-start-name"></strong>
+            <em id="cover-start-step"></em>
+          </li>
+          <li>
+            <strong id="cover-end-name"></strong>
+            <em id="cover-end-step"></em>
+          </li>
+        </ol>
+      </article>
+
+      <article class="panel" id="panel-start">
+        <p class="step" id="start-step"></p>
+        <h2 id="start-name"></h2>
+        <p class="meta" id="start-meta"></p>
+        <p class="blurb" id="start-blurb"></p>
+        <p class="blurb-en" id="start-blurb-en"></p>
+        <div class="photos" id="start-photo-wrap" hidden>
+          <figure class="photo-card">
+            <img id="start-photo" alt="" />
+          </figure>
+        </div>
+        <ul class="chips" id="start-chips"></ul>
+      </article>
+
+      <article class="panel panel--slim" id="panel-route">
+        <p class="step">Walk</p>
+        <h2>골목을 따라 <span id="walk-en"></span></h2>
+        <p class="blurb" id="walk-blurb"></p>
+      </article>
+
+      <article class="panel" id="panel-stop">
+        <p class="step" id="stop-step"></p>
+        <h2 id="stop-name"></h2>
+        <p class="meta" id="stop-meta"></p>
+        <p class="blurb" id="stop-blurb"></p>
+        <p class="blurb-en" id="stop-blurb-en"></p>
+        <div class="photos" id="stop-photo-wrap" hidden>
+          <figure class="photo-card">
+            <img id="stop-photo" alt="" />
+          </figure>
+        </div>
+        <ul class="chips" id="stop-chips"></ul>
+      </article>
+
+      <article class="panel" id="panel-end">
+        <p class="eyebrow">See you there</p>
+        <h2>나중에 봐요 <span id="end-sub"></span></h2>
+        <div class="end-links">
+          <a class="place-link" id="link-start" href="#" target="_blank" rel="noreferrer">
+            <small id="link-start-step"></small>
+            <span id="link-start-name"></span>
+          </a>
+          <a class="place-link" id="link-end" href="#" target="_blank" rel="noreferrer">
+            <small id="link-end-step"></small>
+            <span id="link-end-name"></span>
+          </a>
+        </div>
+      </article>
+    </section>
+
+    <div class="controls">
+      <button type="button" id="btn-courses" hidden>다른 코스</button>
+      <button type="button" id="btn-play" hidden aria-pressed="false">Pause</button>
+      <button type="button" id="btn-replay" hidden>Replay</button>
+    </div>
+
+  </body>
+</html>

@@ -23,11 +23,16 @@ npm run preview  # serve the production build
 
 ## Live site
 
-GitHub Pages serves the **Vite production build**, not the source `index.html`. After Pages is set to **GitHub Actions**, the site is:
+GitHub Pages must publish the **built** site, not the Vite source `index.html` in the repo root.
 
-https://donkimc.github.io/dinner-route/
+1. Repo → **Settings → Pages**
+2. Source: **Deploy from a branch**
+3. Branch: **main**, folder: **/docs**
+4. Save, then open https://donkimc.github.io/dinner-route/
 
-Repo → Settings → Pages → Source: **GitHub Actions**. The first push after that workflow runs deploys `dist/`.
+`npm run build:pages` rebuilds `docs/` after you change the app.
+
+Alternatively, Source: **GitHub Actions** (workflow in `.github/workflows/pages.yml`).
 
 No API keys. The map uses OpenStreetMap tiles via Leaflet.
 

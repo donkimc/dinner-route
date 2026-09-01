@@ -52,4 +52,4 @@ No backend, no map API keys. Ignore `node_modules`, `dist`, `.verify`.
 
 ## GitHub Pages
 
-Deploy via `.github/workflows/pages.yml` (build `dist/`, `base` `/dinner-route/` in CI). Do not point Pages at the repo root — browsers cannot run Vite source modules there, so the page looks like unstyled HTML.
+Deploy via `docs/` (committed Vite build, `base` `/dinner-route/`) or `.github/workflows/pages.yml`. Pages must **not** use the repo root — that serves source `index.html` and looks like unstyled HTML. After UI changes run `npm run build:pages` and commit `docs/`.
