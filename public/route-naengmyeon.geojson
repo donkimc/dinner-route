@@ -1,0 +1,23 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "distance_m": 33,
+        "walk_minutes": 1
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [127.1295853, 37.5423803],
+          [127.129592, 37.542438],
+          [127.1296, 37.542496],
+          [127.129608, 37.542554],
+          [127.129615, 37.542612],
+          [127.1296221, 37.5426721]
+        ]
+      }
+    }
+  ]
+}
