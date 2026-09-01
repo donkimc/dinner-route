@@ -43,7 +43,7 @@ export function buildTimeline(mapApi, { reducedMotion }) {
     .addLabel("walk")
     .add(() => {
       mapApi.showWalker(true);
-      mapApi.setActivePin("start");
+      mapApi.setActivePin("none");
     })
     .to(panels.route, { autoAlpha: 1, y: 0, duration: 0.45 })
     .fromTo(

@@ -81,7 +81,8 @@ export function createInviteMap(container) {
       ghostLine.bringToFront();
       startMarker.setZIndexOffset(1000);
       endMarker.setZIndexOffset(1000);
-      api.setActivePin("both");
+      api.walkZoom = walkZoomFor(map, api.startLatLng, api.endLatLng);
+      api.setActivePin("none");
       map.invalidateSize();
       fitRoute(map, api.startLatLng, api.endLatLng, true);
     },
@@ -101,7 +102,7 @@ export function createInviteMap(container) {
     followWalker(t) {
       if (!api.coords.length) return;
       const { coord } = pointAlong(api.coords, t);
-      map.setView(ll(coord[0], coord[1]), 17, { animate: false });
+      map.setView(ll(coord[0], coord[1]), api.walkZoom ?? 17, { animate: false });
     },
     showWalker(show) {
       walker.setOpacity(show ? 1 : 0);
@@ -113,7 +114,7 @@ export function createInviteMap(container) {
       endEl?.querySelector(".pin")?.classList.toggle("is-active", which === "end" || which === "both");
     },
     flyToStart() {
-      api.setActivePin("start");
+      api.setActivePin("none");
       fitRoute(map, api.startLatLng, api.endLatLng, true);
     },
     flyToEnd() {
@@ -141,12 +142,21 @@ export function createInviteMap(container) {
   return api;
 }
 
+function routeSpan(map, start, end) {
+  return map.distance(start, end);
+}
+
+function walkZoomFor(map, start, end) {
+  return routeSpan(map, start, end) < 120 ? 19 : 17;
+}
+
 function fitRoute(map, start, end, animate) {
-  map.fitBounds(L.latLngBounds([start, end]).pad(0.35), {
+  const short = routeSpan(map, start, end) < 120;
+  map.fitBounds(L.latLngBounds([start, end]).pad(short ? 0.15 : 0.35), {
     animate,
     duration: 0.9,
-    maxZoom: 17,
-    padding: [80, 80],
+    maxZoom: short ? 19 : 17,
+    padding: short ? [36, 36] : [80, 80],
   });
 }
 

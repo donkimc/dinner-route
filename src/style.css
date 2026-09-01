@@ -394,8 +394,8 @@ h2 span {
   border-radius: 999px;
   display: grid;
   place-items: center;
-  background: #1a1410;
-  color: var(--gold);
+  background: var(--gold);
+  color: #1a1410;
   border: 3px solid var(--gold);
   font-size: 1rem;
   font-weight: 700;
@@ -403,8 +403,8 @@ h2 span {
 }
 
 .pin.is-active .pin__num {
-  background: var(--gold);
-  color: #1a1410;
+  background: #1a1410;
+  color: var(--gold);
   animation: pulse 1.6s ease-in-out infinite;
 }
 
