@@ -1,11 +1,12 @@
 # Dinner Route
 
-A static invitation page for two walking dinners in Gangdong, Seoul. Guests pick a course; the map zooms to the stops and GSAP plays the story.
+A static invitation page for walking dinners in Gangdong, Seoul. Guests pick a course; the map zooms to the stops and GSAP plays the story.
 
 ## Courses
 
-1. **저녁 & 커피** — [상록분식](https://naver.me/5gFgYdWQ) → [채스우드커피](https://naver.me/FFGMoP5l) (~380 m, Seongnae-dong)
+1. **양꼬치 & 하이볼** — [이가네양꼬치 길동점](https://naver.me/FG3vkcLC) → [창](https://naver.me/xSBU5hHf) (~670 m, Gildong)
 2. **냉면 & 돼지고기** — [송월냉면](https://naver.me/FK5vf06T) → [깡돈 천호점](https://naver.me/FV7YsX9f) (~30 m, Cheonho-dong)
+3. **피자 & 커피** — [델리치오자](https://naver.me/xEx30ECY) → [채스우드커피](https://naver.me/xllBDs0V) (~880 m, Gildong–Seongnae)
 
 ## Run
 
@@ -38,7 +39,7 @@ No API keys. The map uses OpenStreetMap tiles via Leaflet.
 
 ## Edit copy and routes
 
-All course text, coordinates, Naver links, and photos live in [`src/content.js`](src/content.js). Walking paths are GeoJSON in [`public/route.geojson`](public/route.geojson) and [`public/route-naengmyeon.geojson`](public/route-naengmyeon.geojson) (`[lng, lat]`).
+All course text, coordinates, Naver links, and photos live in [`src/content.js`](src/content.js). Walking paths are GeoJSON in `public/route.geojson`, `public/route-naengmyeon.geojson`, and `public/route-pizza.geojson` (`[lng, lat]`).
 
 Show at most one photo per stop. Omit the photo field if there is no listing image.
 

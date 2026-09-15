@@ -3,7 +3,7 @@ import { pointAlong, sliceLine } from "./geo.js";
 
 const L = Leaflet.default ?? Leaflet;
 
-const PICKER_CENTER = [37.5345, 127.1307];
+const PICKER_CENTER = [37.5358, 127.1348];
 
 export function createInviteMap(container) {
   const map = L.map(container, {

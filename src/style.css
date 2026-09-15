@@ -126,6 +126,8 @@ body {
   right: 1rem;
   bottom: 4.4rem;
   max-width: 17.5rem;
+  max-height: 58vh;
+  overflow: auto;
   padding: 0.7rem 0.8rem 0.75rem;
   border: 1px solid var(--line);
   border-radius: 0.85rem;

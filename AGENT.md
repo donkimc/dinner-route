@@ -4,7 +4,7 @@ Guidance for agents working in this repository.
 
 ## What this is
 
-Vite + vanilla HTML/CSS/JS invitation. Guests choose one of two Gangdong walking courses; Leaflet shows the map; GSAP sequences overlay cards.
+Vite + vanilla HTML/CSS/JS invitation. Guests choose one of three Gangdong walking courses; Leaflet shows the map; GSAP sequences overlay cards.
 
 Do not convert this to React/Next unless asked. Keep it a single static page.
 
@@ -22,7 +22,7 @@ Leaflet uses `[lat, lng]`. GeoJSON and `content.js` coordinates are `[lng, lat]`
 |--------|------|
 | Titles, blurbs, highlights, coords, Naver URLs, photos | `src/content.js` |
 | Picker labels in the first screen | `index.html` (`data-route` must match `routes[].id`) |
-| Walk polyline | `public/route.geojson`, `public/route-naengmyeon.geojson` |
+| Walk polyline | `public/route.geojson`, `public/route-naengmyeon.geojson`, `public/route-pizza.geojson` |
 | Camera / markers / follow-walk | `src/map.js` |
 | Card sequence timing | `src/timeline.js` |
 | Wire picker → map → timeline | `src/main.js` |
@@ -32,7 +32,7 @@ Adding a course: append to `routes` in `content.js`, add a picker button with th
 
 ## Photos
 
-At most **one** photo per stop. If Naver listing has no owner photo, omit `photo` (상록분식). Prefer local files under `public/photos/` or official listing CDN URLs. Do not scrape blog review photos.
+At most **one** photo per stop. If Naver listing has no owner photo, omit `photo`. Prefer local files under `public/photos/` or official listing CDN URLs. Do not scrape blog review photos.
 
 ## Map behavior
 
